@@ -21,6 +21,7 @@ GoogleSignin.configure({
 });
 
 function Home() {
+  console.log('signin object', GoogleSignin);
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
