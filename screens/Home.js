@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {
   GoogleSignin,
@@ -21,8 +21,10 @@ GoogleSignin.configure({
 });
 
 function Home() {
-  console.log('signin object', GoogleSignin);
+  const [isLoading, setLoading] = useState(false);
+
   const signIn = async () => {
+    setLoading(true);
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -45,20 +47,20 @@ function Home() {
   };
 
   console.log('changes');
-  const {logoContainer, container} = styles;
+  const {logoContainer, container, signInContainer} = styles;
   return (
     <View style={container}>
       <View style={logoContainer}>
         <Logo />
       </View>
 
-      <View>
+      <View style={[signInContainer, {transform: [{translateX: '-100%'}]}]}>
         <GoogleSigninButton
           style={{width: 192, height: 48}}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Dark}
           onPress={signIn}
-          disabled={false}
+          disabled={isLoading}
         />
       </View>
     </View>
@@ -73,6 +75,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 100,
+  },
+  signInContainer: {
+    flex: 1,
+    position: 'absolute',
+    bottom: 100,
+    left: '50%',
+    // transform:"translate(-50%,-50%)"
   },
 });
 
