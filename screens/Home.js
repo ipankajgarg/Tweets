@@ -43,6 +43,7 @@ function Home() {
         // some other error happened
         console.log(error, 'some error');
       }
+      setLoading(false);
     }
   };
 
