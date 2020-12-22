@@ -19,6 +19,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './screens/Home';
+import AllBlogsScreen from './screens/AllBlogs';
 
 // function HomeScreen(props) {
 //   return (
@@ -40,16 +41,16 @@ function MyBlogsScreen(props) {
     </View>
   );
 }
-function AllBlogsScreen(props) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text onPress={() => props.navigation.navigate('CreateBlogs')}>
-        {' '}
-        All Blogs Screen
-      </Text>
-    </View>
-  );
-}
+// function AllBlogsScreen(props) {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text onPress={() => props.navigation.navigate('CreateBlogs')}>
+//         {' '}
+//         All Blogs Screen
+//       </Text>
+//     </View>
+//   );
+// }
 function CreateBlogsScreen(props) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -78,8 +79,17 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Dashborad" component={DashboradScreen} />
+        <Stack.Screen
+          name="Dashborad"
+          component={DashboradScreen}
+          options={{title: 'All Blogs'}}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
