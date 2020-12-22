@@ -6,6 +6,7 @@ import {
   statusCodes,
 } from '@react-native-community/google-signin';
 import Logo from '../components/common/Logo';
+import {useNavigation} from '@react-navigation/native';
 
 GoogleSignin.configure({
   //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -20,8 +21,9 @@ GoogleSignin.configure({
     '718901482248-p7cf6cpl3tgjvg12tbotab9nherkcvat.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
 });
 
-function Home() {
+function Home(props) {
   const [isLoading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const signIn = async () => {
     setLoading(true);
@@ -29,6 +31,7 @@ function Home() {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log(userInfo);
+      navigation.navigate('Dashborad');
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
