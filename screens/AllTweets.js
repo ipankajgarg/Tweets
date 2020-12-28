@@ -7,21 +7,24 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Header from '../components/common/Header';
 import Card from '../components/common/Card';
 import axios from 'axios';
 
-function AllBlogs() {
+function AllTweets() {
   const [tweets, setTweets] = useState({data: [], isLoading: false});
+  const navigation = useNavigation();
   const {container, loader} = styles;
 
   useEffect(() => {
+    console.log('changes');
     (async function fetchTweets() {
       setTweets({...setTweets, isLoading: true});
       const data = await axios.get('http://localhost:3000/tweets');
       setTweets({...setTweets, data: data.data, isLoading: false});
     })();
-  }, []);
+  }, [navigation]);
 
   const renderTweets = tweet => {
     console.log(tweet);
@@ -31,7 +34,7 @@ function AllBlogs() {
   return (
     <ScrollView style={container}>
       <View>
-        <Header />
+        <Header heading="All Tweets" />
         {tweets.isLoading ? (
           <ActivityIndicator size="large" />
         ) : (
@@ -52,4 +55,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-export default AllBlogs;
+export default AllTweets;

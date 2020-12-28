@@ -3,21 +3,19 @@ import {View, Text, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 
 console.log(StatusBar.height);
 
-function Header() {
+function Header({heading}) {
   const {container, title} = styles;
 
   return (
-    <SafeAreaView>
-      <View style={container}>
-        <View>
-          <Text>Back</Text>
-        </View>
-        <View>
-          <Text style={title}>Some Content</Text>
-        </View>
-        <View></View>
+    // <SafeAreaView>
+    <View style={container}>
+      <View>{/* <Text>Back</Text> */}</View>
+      <View>
+        <Text style={title}>{heading || 'Some Content'}</Text>
       </View>
-    </SafeAreaView>
+      <View></View>
+    </View>
+    // </SafeAreaView>
   );
 }
 
@@ -29,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
-    marginTop: StatusBar.currentHeight || 0,
+
     borderBottomColor: 'lightgrey', // if you need
     borderBottomWidth: 0.5,
   },

@@ -19,7 +19,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './screens/Home';
-import AllBlogsScreen from './screens/AllBlogs';
+import AllTweetsScreen from './screens/AllTweets';
+import CreateTweetScreen from './screens/CreateTweet';
 
 // function HomeScreen(props) {
 //   return (
@@ -54,7 +55,7 @@ function MyBlogsScreen(props) {
 function CreateBlogsScreen(props) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text onPress={() => props.navigation.navigate('MyBlogs')}>
+      <Text onPress={() => props.navigation.navigate('AllBlogs')}>
         {' '}
         CreateBlogs
       </Text>
@@ -64,10 +65,18 @@ function CreateBlogsScreen(props) {
 
 function DashboradScreen(props) {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="MyBlogs" component={MyBlogsScreen} />
-      <Tab.Screen name="AllBlogs" component={AllBlogsScreen} />
-      <Tab.Screen name="CreateBlogs" component={CreateBlogsScreen} />
+    <Tab.Navigator detachInactiveScreens={false} style={{fontSize: 20}}>
+      {/* <Tab.Screen name="MyBlogs" component={MyBlogsScreen} /> */}
+      <Tab.Screen
+        name="AllBlogs"
+        component={AllTweetsScreen}
+        tabStyle={{fontSize: 20}}
+      />
+      <Tab.Screen
+        name="CreateBlogs"
+        component={CreateTweetScreen}
+        tabStyle={{fontSize: 20}}
+      />
     </Tab.Navigator>
   );
 }
@@ -75,24 +84,32 @@ function DashboradScreen(props) {
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Dashborad"
-          component={DashboradScreen}
-          options={{title: 'All Blogs'}}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Dashborad"
+            component={DashboradScreen}
+            options={{title: 'All Blogs'}}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
-// export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+});
+export default App;
