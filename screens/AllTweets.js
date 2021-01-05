@@ -21,8 +21,12 @@ function AllTweets() {
     console.log('changes');
     (async function fetchTweets() {
       setTweets({...setTweets, isLoading: true});
-      const data = await axios.get('http://localhost:3000/tweets');
-      setTweets({...setTweets, data: data.data, isLoading: false});
+      try {
+        const data = await axios.get('http://localhost:3000/tweets');
+        setTweets({...setTweets, data: data.data, isLoading: false});
+      } catch (err) {
+        console.log('errorr', err);
+      }
     })();
   }, [navigation]);
 

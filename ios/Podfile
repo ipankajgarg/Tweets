@@ -9,6 +9,7 @@ target 'tweets' do
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'GoogleSignIn', '~> 5.0.2'
+  pod 'AppAuth','~> 1.2.0'
 
   target 'tweetsTests' do
     inherit! :complete
