@@ -21,6 +21,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from './screens/Home';
 import AllTweetsScreen from './screens/AllTweets';
 import CreateTweetScreen from './screens/CreateTweet';
+import PN from './screens/PN';
 
 // function HomeScreen(props) {
 //   return (
@@ -90,9 +91,16 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
+            name="PN"
+            component={PN}
+            options={{title: 'Push Notification'}}
+            // options={{headerShown: false}}
+          />
+
+          <Stack.Screen
             name="Dashborad"
             component={DashboradScreen}
-            options={{title: 'All Blogs'}}
+            // options={{title: 'All Blogs'}}
             options={{headerShown: false}}
           />
           <Stack.Screen
