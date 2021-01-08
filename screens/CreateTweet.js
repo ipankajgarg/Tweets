@@ -35,9 +35,13 @@ function CreateTweet() {
         content,
         imageURI: IMAGE_URI,
       });
-      onChangeContent('');
-      onChangeTitle('');
+      // onChangeContent('');
+      // onChangeTitle('');
+      setTimeout(function(){
+        axios.post('http://localhost:5000/',{title,content})
+      },1000)
       navigation.navigate('AllBlogs');
+      
     } catch (err) {
       console.log('some error', err);
     }

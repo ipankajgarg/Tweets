@@ -2,28 +2,28 @@ import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import axios from 'axios';
+
+PushNotification.checkPermissions(function(pemission) {
+  console.log('perrmission', pemission);
+});
 
 PushNotification.configure({
   // (optional) Called when Token is generated (iOS and Android)
   onRegister: function(token) {
     console.log('TOKEN:', token);
+    axios
+      .post('http://localhost:5000/token', {token: token.token})
+      .then(() => console.log('success'))
+      .catch(err => {
+        console.log(err);
+      });
   },
 
   // (required) Called when a remote is received or opened, or local notification is opened
   onNotification: function(notification) {
     console.log('NOTIFICATION:', notification);
     console.log('LOCAL NOTIFICATION ==>', notification);
-    // PushNotification.localNotification({
-    //   channelId: 'fcm_fallback_notification_channel',
-    //   title: notification.data.message, // (optional)
-    //   message: notification.data.message, // (required)
-    //   playSound: true, // (optional) default: true
-    //   soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
-    //   //number: 10, // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
-    //   //repeatType: 'day',
-    // });
-    //*
-    // process the notification
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
 
@@ -67,7 +67,7 @@ function PN() {
   function localNotification() {
     PushNotification.createChannel(
       {
-        channelId: 'fcm_fallback_notification_channel', // (required)
+        channelId: 'new channel', // (required)
         channelName: 'My channel', // (required)
         channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
         playSound: true, // (optional) default: true
@@ -81,7 +81,7 @@ function PN() {
     //for andoird and IOs
     //*********************** */
     PushNotification.localNotification({
-      channelId: 'fcm_fallback_notification_channel',
+      channelId: 'new channel',
       title: 'My Notification Title', // (optional)
       message: 'My Notification Message', // (required)
       playSound: true, // (optional) default: true
