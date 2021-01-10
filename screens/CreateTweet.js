@@ -37,11 +37,10 @@ function CreateTweet() {
       });
       // onChangeContent('');
       // onChangeTitle('');
-      setTimeout(function(){
-        axios.post('http://localhost:5000/',{title,content})
-      },1000)
-      navigation.navigate('AllBlogs');
-      
+      setTimeout(function() {
+        axios.post('http://localhost:5000/', {title, content});
+      }, 1000);
+      navigation.navigate('Dashboard');
     } catch (err) {
       console.log('some error', err);
     }

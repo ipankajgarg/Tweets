@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, AsyncStorage, Dimensions, StyleSheet} from 'react-native';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -7,6 +7,8 @@ import {
 } from '@react-native-community/google-signin';
 import Logo from '../components/common/Logo';
 import {useNavigation} from '@react-navigation/native';
+
+const {height, width} = Dimensions.get('window');
 
 GoogleSignin.configure({
   //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -31,7 +33,9 @@ function Home(props) {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log(userInfo);
-      navigation.navigate('Dashborad');
+      AsyncStorage.setItem('isLoggedIn', 'true', (err, result) => {
+        navigation.navigate('Dashboard');
+      });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -58,7 +62,7 @@ function Home(props) {
         <Logo />
       </View>
 
-      <View style={[signInContainer, {transform: [{translateX: '-100%'}]}]}>
+      <View style={[signInContainer]}>
         <GoogleSigninButton
           style={{width: 192, height: 48}}
           size={GoogleSigninButton.Size.Wide}
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     bottom: 100,
-    left: '50%',
+    // left: '50%',
     // transform:"translate(-50%,-50%)"
   },
 });
