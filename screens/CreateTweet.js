@@ -40,7 +40,7 @@ function CreateTweet() {
       setTimeout(function() {
         axios.post('http://localhost:5000/', {title, content});
       }, 1000);
-      navigation.navigate('Dashboard');
+      navigation.navigate('AllBlogs');
     } catch (err) {
       console.log('some error', err);
     }

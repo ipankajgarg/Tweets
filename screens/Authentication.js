@@ -15,7 +15,7 @@ function Authentication() {
     });
   });
 
-  return <View style={{flex: 1, backgroundColor: 'black'}}></View>;
+  return <View style={{flex: 1, backgroundColor: 'white'}}></View>;
 }
 
 export default Authentication;
