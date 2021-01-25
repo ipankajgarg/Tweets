@@ -172,16 +172,16 @@ class App extends Component {
         <NavigationContainer>
           <Stack.Navigator>
             {/* <Stack.Screen
-            name="PN"
-            component={PN}
-            options={{title: 'Push Notification'}}
-            // options={{headerShown: false}}
-          /> */}
-            <Stack.Screen
+              name="PN"
+              component={PN}
+              options={{title: 'Push Notification'}}
+              // options={{headerShown: false}}
+            /> */}
+            {/* <Stack.Screen
               name="Authentication"
               component={Authentication}
               options={{headerShown: false}}
-            />
+            /> */}
 
             <Stack.Screen
               name="Dashboard"
