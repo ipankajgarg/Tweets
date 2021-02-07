@@ -15,10 +15,9 @@ import Header from '../components/common/Header';
 const IMAGE_URI =
   'https://urbanmatter.com/chicago/wp-content/uploads/2019/10/shutterstock_1434827354.jpg';
 
-const {CalendarModule} = NativeModules;
+const {ImagePickerModule} = NativeModules;
 
-const {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();
-console.log('some default name vhjvhv', DEFAULT_EVENT_NAME);
+console.log(ImagePickerModule);
 
 function InputHook(state = '') {
   const [text, setText] = useState(state);
@@ -35,14 +34,11 @@ function CreateTweet() {
   const navigation = useNavigation();
 
   async function onCreate() {
-    const {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();
-    console.log('some default name vhjvhv', DEFAULT_EVENT_NAME);
+    // const {DEFAULT_EVENT_NAME} = CalendarModule.getConstants();
+    // console.log('some default name vhjvhv', DEFAULT_EVENT_NAME);
 
     try {
-      const eventId = await CalendarModule.createCalendarEvent(
-        'Party',
-        'My House',
-      );
+      const eventId = await ImagePickerModule.pickImage();
       console.log(`Created a new event with id ${eventId}`);
     } catch (e) {
       console.error(e);
